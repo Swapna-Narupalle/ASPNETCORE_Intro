@@ -1,0 +1,34 @@
+﻿
+
+
+1. what is the controller ?
+   conroller which is useful to prepare the resoruces | actions | endpoints 
+
+
+
+angular 
+put | patch | Delte
+
+
+employeecontroller --> 
+
+
+2. what is repository?
+   its kind of "strogage place" class 
+
+   a Repository class is responsible for fetching, adding, updating, and deleting data.
+
+
+   Middleman controller and datasource(database,inmeemory)
+
+
+3. Main jon
+   DAta access , Handle the CRUD Opertions
+
+Example :  Books-Library(DataSource)  ----> 1,00,000
+
+           Book    ---> Libririan(Middleman) (Repository) 
+
+
+           Books-Library(DataSource)  - 1st building , 2nd building  ----> 1,00,000
+           Book    ---> Libririan (Repository) , GET

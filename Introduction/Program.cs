@@ -1,8 +1,13 @@
+using Introduction;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//you are creating the instance   IEmployeeV2Reposiotry   = new InMemoryEmployeeRepository( i am the boss angularcorecomipler
+builder.Services.AddScoped<IEmployeeV2Reposiotry, InMemoryEmployeeRepository>();
 
 builder.Services.AddCors((cors) =>
 {
