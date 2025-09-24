@@ -65,6 +65,61 @@ namespace Introduction.Controllers.Employees_3
 
 
 
+        //https://localhost:7233/api/EmployeeV3/CreateEmployee
+
+        //public string Name { get; set; }
+        //public string Location { get; set; }
+        //public decimal Salary { get; set; }
+        //public int Age { get; set; }
+        //public DateTime JoiningDate { get; set; }
+        //public DateTime? DOB { get; set; }
+        //public string StreetAdress { get; set; }
+
+        [HttpPost]
+        [Route("CreateEmployee")]
+        public async Task<IActionResult> CreateEmployee(
+           [FromBody] NewEmployeeDTO newemployee)
+        {
+
+            var result = await NewEmployee(newemployee);
+            if (result == "Failed")
+            {
+                return BadRequest("Employee deatils are not good narmada . please give proepr details");
+            }
+
+            return Created("Api/Employeev3/CreateEmployee", newemployee);
+        }
+
+
+       // For Post body output
+
+       // {
+       //    "Name": "John",
+       //    "Location":"UK",
+       //    "Salary": 25000,
+       //    "age":20,
+       //    "JoiningDate":"2025-09-23T10:30:45.12345672",
+       //    "D0B":"2025-09-23",
+       //    "StreetAdress": "adfa"
+       //}
+
+
+        private async Task<string> NewEmployee(NewEmployeeDTO newemployee)
+        {
+
+            await Task.Delay(2000);
+
+            if (string.IsNullOrWhiteSpace(newemployee.Name))
+            {
+                return "failed";
+            }
+            return "Success";
+
+        }
+
+
+
+
 
 
 
@@ -97,5 +152,18 @@ public class EmployeeDTO
     public string EmpName { get; set; }
     public string Location { get; set; }
     public double Salary { get; set; }
+
+}
+
+public class NewEmployeeDTO
+{
+    public string? Name { get; set; }
+    public string Location { get; set; }
+    public decimal Salary { get; set; }
+    public int Age { get; set; }
+    public DateTime JoiningDate { get; set; }
+    public DateTime? DOB { get; set; }
+    public string? StreetAdress { get; set; }
+
 
 }
