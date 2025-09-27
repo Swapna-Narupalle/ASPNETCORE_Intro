@@ -16,6 +16,9 @@ builder.Services.AddCors((cors) =>
     });
 });
 
+//https://localhost:7233/api/Employees/GetEmpName
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,7 +26,13 @@ var app = builder.Build();
 app.UseCors("AllowLocalhost4200");
 
 
-app.UseMiddleware<HTTPContextMiddleware>();
+//Multiple middlewares in future
+//app.UseMiddleware<HTTPContextMiddleware>();
+//logging
+//excption
+//autthenication
+app.UseHttpContextDemo();
+app.UseLoggingContextDemo();
 
 app.UseHttpsRedirection();
 
