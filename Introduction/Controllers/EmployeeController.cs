@@ -6,7 +6,7 @@ namespace Introduction.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class HttpContextDemoController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
 
 
@@ -22,7 +22,9 @@ namespace Introduction.Controllers
         /// <param name=""></param>
         /// <returns></returns>
 
-        //https://localhost:7233/api/HttpContextDemo/ShowContext/1?age=20&location=hye
+
+        //httpcontext --> request and response
+        //https://localhost:7233/api/Employee/ShowContext/1?age=20&location=hye
         [HttpPost("ShowContext/{Id}")]
         public IActionResult ShowContext(
             int Id,   //Router param
@@ -32,17 +34,6 @@ namespace Introduction.Controllers
             [FromHeader(Name = "Custom-header")] string customheader  //Header
             )
         {
-
-            var context = HttpContext;
-
-            var httpContextHeaders = HttpContext.Request.Headers;
-            var httpContextBody = HttpContext.Request.Body;
-
-            var httpContextPath = HttpContext.Request.Path;
-
-
-            HttpContext.Response.Headers.Append("X-demo-Response", "This came from server");
-            HttpContext.Response.Headers.Append("X-demo-statusCode", "Successfull");
 
 
 
@@ -58,8 +49,11 @@ namespace Introduction.Controllers
 
         }
 
-
-
+        [HttpGet("ShowContext/{Id}")]
+        public IActionResult GetEmployeeNames(int Id)
+        {
+            return Ok("Employee fetched successfully");
+        }
 
 
     }
