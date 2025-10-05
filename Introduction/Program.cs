@@ -1,10 +1,16 @@
 using Introduction;
+using Introduction.Extensions;
+using Introduction.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
+
 
 builder.Services.AddCors((cors) =>
 {
@@ -31,8 +37,11 @@ app.UseCors("AllowLocalhost4200");
 //logging
 //excption
 //autthenication
-app.UseHttpContextDemo();
-app.UseLoggingContextDemo();
+
+//app.UseHttpContextDemo();
+//app.UseLoggingContextDemo();
+
+app.UseAuthentictionDemo();
 
 app.UseHttpsRedirection();
 

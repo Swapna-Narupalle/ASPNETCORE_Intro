@@ -1,4 +1,7 @@
-﻿namespace Introduction
+﻿using Introduction.Middleware;
+
+
+namespace Introduction.Extensions
 {
     public static class MiddlewareExtensions
     {
@@ -14,10 +17,10 @@
         }
 
 
-        //public static IApplicationBuilder UseHttpContextDemo(this IApplicationBuilder builder)
-        //{
-        //    return builder.UseMiddleware<HTTPContextMiddleware>();
-        //}
+        public static IApplicationBuilder UseAuthentictionDemo(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<AuthenticationMiddleware>();
+        }
 
     }
 }
