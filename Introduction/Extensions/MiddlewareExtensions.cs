@@ -22,5 +22,11 @@ namespace Introduction.Extensions
             return builder.UseMiddleware<AuthenticationMiddleware>();
         }
 
+
+        public static IApplicationBuilder UseJWTAuthentictionDemo(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<JWTAuthenticationMiddleware>();
+        }
+
     }
 }

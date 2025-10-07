@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<IJWTAuthenticationService, JWTAuthenticationService>();
 
 
 
@@ -42,6 +43,8 @@ app.UseCors("AllowLocalhost4200");
 //app.UseLoggingContextDemo();
 
 app.UseAuthentictionDemo();
+
+app.UseJWTAuthentictionDemo();
 
 app.UseHttpsRedirection();
 

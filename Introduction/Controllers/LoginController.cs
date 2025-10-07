@@ -1,4 +1,5 @@
-﻿using Introduction.Services;
+﻿
+using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Introduction.Controllers
@@ -9,9 +10,11 @@ namespace Introduction.Controllers
     {
 
         IAuthenticationService _AuthenticationService;
-        public LoginController(IAuthenticationService authenticationService)
+        IJWTAuthenticationService _JWTAuthenticationService;
+        public LoginController(IAuthenticationService authenticationService, IJWTAuthenticationService jWTAuthentication)
         {
             _AuthenticationService = authenticationService;
+            _JWTAuthenticationService = jWTAuthentication;
         }
 
         //[api]/[controller]/[actionname]
@@ -23,7 +26,7 @@ namespace Introduction.Controllers
             if (customerDTO.Username == "Madan" && customerDTO.Password == "madan!123")
             {
                 //i need to give the token
-                string token = _AuthenticationService.GenerateToken(customerDTO.Username, "Customer");
+                string token = _JWTAuthenticationService.GenerateToken(customerDTO.Username, "Customer");
                 return Ok(new { Token = token });
             }
             else if (string.IsNullOrEmpty(customerDTO.Username) || string.IsNullOrEmpty(customerDTO.Password))
