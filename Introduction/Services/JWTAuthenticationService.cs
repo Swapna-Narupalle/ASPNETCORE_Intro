@@ -52,10 +52,43 @@ namespace Introduction.Services
             return finalToken;
         }
 
-        public string ValidateToken(string token)
+        public ClaimsPrincipal ValidateToken(string token)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            //token Parameters
+            var validationParams = new TokenValidationParameters()
+            {
+
+                ValidateIssuer = true,
+                ValidIssuer = _issuer,
+
+                ValidateAudience = true,
+                ValidAudience = _audiance,
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secreat)),
+               
+
+                //to ensure my claims are also need to validate
+                NameClaimType = ClaimTypes.Name,
+                RoleClaimType = ClaimTypes.Role,
+
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken validateToken;
+
+            var authorizationtoken = token.Substring("Bearer ".Length).Trim();
+
+            ClaimsPrincipal principal = tokenHandler.ValidateToken(token, validationParams, out validateToken);
+
+
+
+            return principal;
             //throw new NotImplementedException();
-            return null;
+
         }
     }
 }

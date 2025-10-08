@@ -22,6 +22,7 @@ namespace Introduction.Controllers
         [HttpPost("LoginUser")]
         public IActionResult LoginUser([FromBody] CustomerDTO customerDTO)
         {
+            List<CustomerDTO> cus = new List<CustomerDTO>();
 
             if (customerDTO.Username == "Madan" && customerDTO.Password == "madan!123")
             {

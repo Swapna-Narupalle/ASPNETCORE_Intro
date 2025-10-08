@@ -1,4 +1,5 @@
 ﻿using Introduction.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Introduction.Controllers
@@ -9,9 +10,9 @@ namespace Introduction.Controllers
     public class BankTransactionsJWTController : ControllerBase
     {
         IJWTAuthenticationService _JWTAuthenticationService;
-        public BankTransactionsJWTController(IJWTAuthenticationService jwtauthenticationService)
+        public BankTransactionsJWTController(IJWTAuthenticationService jWTauthenticationService)
         {
-            _JWTAuthenticationService = jwtauthenticationService;
+            _JWTAuthenticationService = jWTauthenticationService;
         }
 
         //[api]/[controller]/[actionname]
@@ -24,21 +25,16 @@ namespace Introduction.Controllers
         }
 
 
-
-        //[HttpPost("GetCustomerDepoistHistory")]
-        //public IActionResult GetCsutoemrCreditCArdTRansacion([FromBody] CustomerDTO customerDTO)
-        //{
-
-        //}
-
-
-
-        //[HttpPost("GetCsutoemrCreditCArdTRansacion")]
-        //public IActionResult GetCsutoemrCreditCArdTRansacion([FromBody] CustomerDTO customerDTO)
-        //{
-
-        //}
-
+        //Autherization
+        //https://localhost:7233/api/BankTransactionsJWT/GetBankLevelTrasactions
+        //whether authenticated user having to access the particular resource or not
+        [Authorize(Roles = "Customer")]
+        [HttpPost("GetBankLevelTrasactions")]
+        public IActionResult GetBankLevelTrasactions()
+        {
+            var _message = "You are the manager so you can check the Bank level transactions";
+            return Ok("record success");
+        }
 
 
 

@@ -1,4 +1,5 @@
 ﻿using Introduction.Services;
+using System.Security.Claims;
 
 
 namespace Introduction.Middleware
@@ -29,18 +30,19 @@ namespace Introduction.Middleware
             var authizationToken = context.Request.Headers["Authorization"].ToString();
             if (!string.IsNullOrEmpty(authizationToken))
             {
-                string status = _jwtauthetnicationService.ValidateToken(authizationToken);
+                //details of the user called principle user identity name, role values
+                ClaimsPrincipal principal = _jwtauthetnicationService.ValidateToken(authizationToken);
 
-                if (status == "Valid")
+                if(principal != null)
                 {
-                    context.Response.Headers["MyTokenisValidOrnot"] = status;
-                    await _next(context); //respetive action
+                    context.User = principal;
                 }
                 else
                 {
-                    context.Response.Headers["MyTokenisValidOrnot"] = status;
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                     return;
                 }
+
             }
             else
             {

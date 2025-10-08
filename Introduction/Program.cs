@@ -42,7 +42,7 @@ app.UseCors("AllowLocalhost4200");
 //app.UseHttpContextDemo();
 //app.UseLoggingContextDemo();
 
-app.UseAuthentictionDemo();
+//app.UseAuthentictionDemo();
 
 app.UseJWTAuthentictionDemo();
 
